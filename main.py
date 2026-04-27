@@ -433,8 +433,8 @@ async def startup():
         logger.info(f'Admin seeded: {admin_email}')
     elif not verify_password(admin_password, existing['password_hash']):
         await db.users.update_one({'email': admin_email}, {'$set': {'password_hash': hash_password(admin_password)}})
-    creds = Path('/app/memory/test_credentials.md')
-    creds.parent.mkdir(exist_ok=True)
+    creds = Path('memory/test_credentials.md')
+    creds.parent.mkdir(parents=True, exist_ok=True)
     creds.write_text(f"""# SurgiLog Test Credentials
 
 ## Admin User
